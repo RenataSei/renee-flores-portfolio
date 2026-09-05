@@ -363,7 +363,7 @@ export const PROFILE_DATA = {
   bio: 'De La Salle University - Dasmariñas (BIT45) graduate. I build full-stack web applications, network automation tools, and backend services using React, Node.js, C#, and Python, focusing on reliability, practical problem-solving, and clean software architecture.',
   availability: 'Actively Interviewing • Ready for Remote & Onsite (Dubai / Manila)',
   stats: [
-    { label: 'DLSU-D Thesis', value: 'Meet-Ur Garden (Passed)' },
+    { label: 'DLSU-D Thesis', value: 'Meet-Ur Garden' },
     { label: 'Client Rescue', value: '14-Day LAN System' },
     { label: 'English Fluency', value: '980 TOEIC' },
     { label: 'Primary Stacks', value: 'React · Node · Python' }
