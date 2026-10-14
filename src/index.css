@@ -61,12 +61,14 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
   background-color: var(--bg-primary);
+  scrollbar-gutter: stable;
 }
 
 body {

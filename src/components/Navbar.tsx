@@ -3,9 +3,10 @@ import { Terminal, Menu, X, ArrowUpRight } from 'lucide-react';
 
 interface NavbarProps {
   onContactClick: () => void;
+  onTerminalClick: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onContactClick, onTerminalClick }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -42,6 +43,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
 
         {/* Action Buttons */}
         <div className="nav-actions">
+          <button
+            id="nav-terminal-btn"
+            onClick={onTerminalClick}
+            className="nav-cli-btn"
+            title="Open Developer Console (Press ~)"
+            aria-label="Open Developer Console"
+          >
+            <Terminal size={14} className="text-cyan" />
+            <span>Deck</span>
+            <kbd>~</kbd>
+          </button>
+
           <button 
             id="nav-contact-btn"
             onClick={onContactClick} 
@@ -87,6 +100,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
           >
             About & Telemetry
           </a>
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              onTerminalClick();
+            }}
+            className="nav-cli-btn mobile-contact-btn"
+            style={{ marginBottom: '0.6rem', justifyContent: 'center' }}
+          >
+            <Terminal size={14} className="text-cyan" />
+            <span>Developer Console [~]</span>
+          </button>
           <button 
             onClick={() => {
               setMobileMenuOpen(false);

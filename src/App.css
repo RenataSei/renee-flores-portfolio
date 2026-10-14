@@ -540,12 +540,22 @@
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  animation: modalFadeIn 0.2s ease-out;
+  animation: modalFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity;
+}
+
+.modal-overlay.modal-closing {
+  animation: modalFadeOut 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes modalFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+@keyframes modalFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
 .modal-container {
@@ -559,12 +569,41 @@
   box-shadow: var(--shadow-elevated);
   position: relative;
   overflow: hidden;
-  animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.modal-container.modal-container-closing {
+  animation: modalPopOut 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes modalPop {
   from { transform: scale(0.96) translateY(8px); opacity: 0; }
   to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+@keyframes modalPopOut {
+  from { transform: scale(1) translateY(0); opacity: 1; }
+  to { transform: scale(0.96) translateY(8px); opacity: 0; }
+}
+
+/* Mobile Tactile Pull Handle */
+.mobile-sheet-handle-bar {
+  display: none;
+  width: 100%;
+  padding-top: 0.75rem;
+  padding-bottom: 0.25rem;
+  justify-content: center;
+  align-items: center;
+  background: rgba(14, 20, 31, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.mobile-sheet-handle {
+  width: 38px;
+  height: 4.5px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .modal-header {
@@ -607,12 +646,12 @@
   font-size: clamp(1.6rem, 3vw, 2.1rem);
   font-weight: 700;
   color: var(--text-primary);
+  margin-bottom: 0.35rem;
 }
 
 .modal-subtitle {
   font-size: 1.05rem;
   color: var(--accent-sky);
-  margin-top: -1.2rem;
 }
 
 .modal-info-strip {
@@ -694,14 +733,72 @@
   color: var(--text-muted);
 }
 
-/* Architecture Diagram Container */
-.architecture-diagram-box {
-  background: #090d15;
-  border: 1px solid rgba(56, 189, 248, 0.2);
+/* Architecture Diagram Container with Terminal-Style Frame */
+.architecture-diagram-wrapper {
   border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  background: #090d15;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.architecture-diagram-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.diagram-header-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.diagram-header-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.diagram-header-dots .dot-cyan { background: var(--accent-sky); }
+.diagram-header-dots .dot-blue { background: var(--accent-blue); }
+.diagram-header-dots .dot-purple { background: var(--accent-indigo); }
+
+.diagram-filename {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-left: 0.4rem;
+}
+
+.btn-diagram-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-diagram-copy:hover {
+  color: var(--accent-sky);
+  border-color: rgba(56, 189, 248, 0.35);
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.architecture-diagram-box {
+  background: transparent;
   padding: 1.25rem 1.5rem;
   overflow-x: auto;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .diagram-pre {
@@ -1347,8 +1444,55 @@
   .projects-grid { grid-template-columns: 1fr; }
   .contact-card { padding: 1.75rem; }
   .about-main-card { padding: 1.5rem; }
-  .modal-container { max-height: 95vh; }
-  .modal-header, .modal-body, .modal-footer { padding: 1.25rem; }
+  
+  /* Mobile-Native Bottom Sheet Transformation */
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .modal-container {
+    max-height: 88vh;
+    border-radius: 24px 24px 0 0;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    animation: sheetSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+  }
+
+  .modal-container.modal-container-closing {
+    animation: sheetSlideDown 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .mobile-sheet-handle-bar {
+    display: flex;
+  }
+
+  .modal-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .modal-body {
+    padding: 1.25rem;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .modal-footer {
+    padding: 1rem 1.25rem max(1.25rem, env(safe-area-inset-bottom)) 1.25rem;
+  }
+
+  @keyframes sheetSlideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  @keyframes sheetSlideDown {
+    from { transform: translateY(0); }
+    to { transform: translateY(100%); }
+  }
+
   .contact-actions-row { flex-direction: column; width: 100%; }
   .contact-actions-row button, .contact-actions-row a { width: 100%; }
   .bottom-footer { flex-direction: column; text-align: center; }
