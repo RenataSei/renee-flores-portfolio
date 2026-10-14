@@ -33,7 +33,7 @@ export const ContactSection: React.FC = () => {
                 onClick={handleCopyEmail}
                 className="btn-primary-glow"
               >
-                {copied ? <Check size={18} /> : <Copy size={18} />}
+                {copied ? <Check size={18} className="icon-pop-spring" /> : <Copy size={18} />}
                 <span>{copied ? 'Copied to Clipboard!' : 'Copy Email Address'}</span>
               </button>
 

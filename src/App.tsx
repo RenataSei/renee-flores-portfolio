@@ -9,6 +9,7 @@ import { AboutSection } from './components/AboutSection';
 import { ContactSection } from './components/ContactSection';
 import { CaseStudyModal } from './components/CaseStudyModal';
 import { CliTerminal } from './components/CliTerminal';
+import { LivePageMoshIntro } from './components/LivePageMoshIntro';
 
 export const App: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -41,6 +42,9 @@ export const App: React.FC = () => {
 
   return (
     <div className="portfolio-root">
+      {/* Live-DOM Pixel Sorting & Datamosh Entrance (applied directly to the real living webpage) */}
+      <LivePageMoshIntro />
+
       {/* Dynamic Ambient Background (CSS GPU-efficient gradient) */}
       <div className="ambient-bg" aria-hidden="true" />
 

@@ -187,7 +187,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ project, onClose
                     title="Copy ASCII architecture diagram to clipboard"
                     aria-label="Copy architecture diagram"
                   >
-                    {diagramCopied ? <Check size={13} className="text-emerald" /> : <Copy size={13} />}
+                    {diagramCopied ? <Check size={13} className="text-emerald icon-pop-spring" /> : <Copy size={13} />}
                     <span>{diagramCopied ? 'Copied' : 'Copy Diagram'}</span>
                   </button>
                 </div>

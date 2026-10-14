@@ -30,6 +30,9 @@ const COMMAND_LIST = [
   'mriya',
   'mocchi',
   'coffee',
+  'pixelsort',
+  'sort',
+  'sort test',
   'clear',
   'exit',
   'quit'
@@ -381,6 +384,50 @@ export const CliTerminal: React.FC<CliTerminalProps> = ({
             </div>
           </div>
         );
+        break;
+
+      case 'sort test':
+      case 'pixelsort test':
+      case 'mosh test':
+      case 'test sort':
+      case 'test mosh':
+        output = (
+          <div>
+            <div className="cli-bold cli-amber">🔬 Initiating Slow-Motion Pixel Coalescence (3.5s)...</div>
+            <div className="cli-output">
+              Simulating entropy-to-order deconstruction at 3.5s slow-motion.
+              <br />
+              <span className="cli-cyan">Closing CLI and launching inspection pass now...</span>
+            </div>
+          </div>
+        );
+        sessionStorage.setItem('fl_livemosh_test', 'slow');
+        sessionStorage.removeItem('fl_livemosh_played');
+        setTimeout(() => {
+          onClose();
+          window.dispatchEvent(new CustomEvent('fl:trigger-sort', { detail: { mode: 'slow' } }));
+        }, 400);
+        break;
+
+      case 'pixelsort':
+      case 'sort':
+      case 'datamosh':
+      case 'mosh':
+      case 'intro':
+        output = (
+          <div>
+            <div className="cli-bold cli-cyan">⚡ Triggering Live-Page Pixel Coalescence (950ms)...</div>
+            <div className="cli-output">
+              Executing snappy entropy-to-order page assembly in real time.
+            </div>
+          </div>
+        );
+        sessionStorage.removeItem('fl_livemosh_played');
+        sessionStorage.removeItem('fl_livemosh_test');
+        setTimeout(() => {
+          onClose();
+          window.dispatchEvent(new CustomEvent('fl:trigger-sort', { detail: { mode: 'normal' } }));
+        }, 300);
         break;
 
       case 'contact':

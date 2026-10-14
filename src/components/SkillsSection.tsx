@@ -12,6 +12,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
   'Full-Stack Web Development': <Code2 size={20} className="text-cyan" />,
   'Databases & Concurrency': <Database size={20} className="text-blue" />,
   'Security & Quality Standards': <ShieldCheck size={20} className="text-amber" />,
+  'Systems, Automation & Tools': <Terminal size={20} className="text-emerald" />,
   'Systems, Mobile & Tooling': <Terminal size={20} className="text-emerald" />
 };
 
